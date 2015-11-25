@@ -11,6 +11,11 @@ module Samin
     let(:fifty_eur) { Money.new(money_amount, money_currency) }
     let(:currency_to_convert) { 'USD' }
     let(:converted_money) { fifty_eur.convert_to(currency_to_convert) }
+    let(:twenty_dollars ) { Money.new(20, 'USD') }
+    let(:arith_sum_result) { fifty_eur+twenty_dollars }
+    let(:arith_sub_result) {  fifty_eur-twenty_dollars }
+    let(:arith_div_result) { fifty_eur/2 }
+    let(:arith_mul_result) { twenty_dollars*3 }
 
     context 'Instantiation' do
       describe '#initialize' do
@@ -93,7 +98,9 @@ module Samin
 
     context 'Arithmetics' do
       describe '#+' do
-        it 'is a pending example'
+        it 'should return as result the sum of prvoided moneys' do
+          expect(arith_sum_result.amount).to eq Money.new(68.02 ,'EUR').amount
+        end
       end
 
       describe '#-' do
