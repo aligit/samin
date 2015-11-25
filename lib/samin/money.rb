@@ -47,6 +47,10 @@ module Samin
       Money.new((@amount/dividend).to_f,@currency)
     end
 
+    def *(multiplicand)
+      Money.new((@amount*multiplicand).to_f,@currency)
+    end
+
     def self.conversion_rates(currency_name = 'EUR', rates = {})
       unless currency_name.nil? || rates.nil?
         @@currency_ref_name ||= currency_name
