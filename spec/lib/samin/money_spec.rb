@@ -22,10 +22,10 @@ module Samin
         end
         context 'when conversion rates are not provided' do
           it 'sets default conversion rates when they are not provide' do
-            expect(Money.class_variable_get(
-              :@@currency_ref_name)).to eq conf_base_name
-            expect(Money.class_variable_get(
-              :@@currency_ref_conversion_rates)).to eq conf_conversion_rates
+            expect(Money.instance_variable_get(:@currency_ref_name))
+              .to eq conf_base_name
+            expect(Money.instance_variable_get(:@currency_ref_conversion_rates))
+              .to eq conf_conversion_rates
           end
         end
       end
