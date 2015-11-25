@@ -18,6 +18,8 @@ module Samin
     let(:arith_mul_result) { twenty_dollars*3 }
     let(:twenty_dollars2) { Money.new(20, 'USD') }
     let(:twenty_dollars3) { Money.new(30, 'USD') }
+    let(:fifty_eur_in_usd) { fifty_eur.convert_to('USD') }
+
 
     context 'Instantiation' do
       describe '#initialize' do
@@ -143,6 +145,9 @@ module Samin
         end
         it 'returns false if not equal' do
           expect(twenty_dollars == twenty_dollars3).to be_falsy
+        end
+        it 'returns true if equal even though they are not originally from same currency' do
+          expect(fifty_eur_in_usd == fifty_eur).to be_truthy
         end
       end
 

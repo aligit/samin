@@ -53,9 +53,10 @@ module Samin
 
     def ==(other)
       if other.currency.eql? @currency
-        return true if other.amount.round(2).eql? @amount.round(2)
+        return other.amount.round(2).eql? @amount.round(2)
+      else
+        return  other.convert_to(@currency).amount.round(2).eql? @amount.round(2)
       end
-      false
     end
 
     def self.conversion_rates(currency_name = 'EUR', rates = {})
