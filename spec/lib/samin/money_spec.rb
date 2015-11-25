@@ -116,7 +116,12 @@ module Samin
       end
 
       describe '#/' do
-        it 'is a pending example'
+        it 'given dividend returns the result of divison of amount' do
+          Money.conversion_rates(
+            conf_base_name,
+            conf_conversion_rates)
+          expect(arith_div_result.amount).to eq Money.new(25 ,'EUR').amount
+        end
       end
 
       describe '#*' do
