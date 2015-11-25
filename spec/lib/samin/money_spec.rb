@@ -6,7 +6,9 @@ module Samin
     let(:conf_conversion_rates) { { 'USD' => 1.11, 'Bitcoin' => 0.0047 } }
     let(:new_amount) { 20 }
     let(:new_currency) { 'CHF' }
-    let(:fifty_eur) { Money.new(50, 'EUR') }
+    let(:money_amount) { 50 }
+    let(:money_currency) { 'EUR' }
+    let(:fifty_eur) { Money.new(money_amount, money_currency) }
 
     context 'Instantiation' do
       describe '#initialize' do
@@ -53,11 +55,15 @@ module Samin
     end
 
     describe '#currency' do
-      it 'is a pending example'
+      it 'returns currency of money' do
+        expect(fifty_eur.currency).to eq money_currency
+      end
     end
 
     describe '#amount' do
-      it 'is a pending example'
+      it 'returns amount of money' do
+        expect(fifty_eur.amount).to eq money_amount
+      end
     end
 
     describe '#convert_to' do
