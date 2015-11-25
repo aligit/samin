@@ -107,7 +107,12 @@ module Samin
       end
 
       describe '#-' do
-        it 'is a pending example'
+        it 'should return as result the substraction of prvoided moneys' do
+          Money.conversion_rates(
+            conf_base_name,
+            conf_conversion_rates)
+          expect(arith_sub_result.amount).to eq Money.new(31.98 ,'EUR').amount
+        end
       end
 
       describe '#/' do
