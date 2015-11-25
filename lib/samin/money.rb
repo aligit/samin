@@ -1,6 +1,4 @@
-require "samin/version"
-
-module Samin
+module Samin::Money
   @@conversion_rates
   class Money
     def initialize(args)
