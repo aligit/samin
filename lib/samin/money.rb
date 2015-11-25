@@ -1,4 +1,3 @@
-require 'pry'
 module Samin
   ## Money class that implements required features for currency
   ## conversion
@@ -18,62 +17,63 @@ module Samin
     def convert_to(currency)
       rate = @@currency_ref_conversion_rates[currency]
       return nil if rate.nil?
-      Money.new((@amount*rate).to_f.round(2),currency)
+      Money.new((@amount * rate).to_f.round(2), currency)
     end
 
     def +(other)
       sum = -1
       if other.currency.eql? @currency
-        sum = @amount+other.amount
+        sum = @amount + other.amount
       else
         other_converted = other.convert_from(other.currency)
         sum = other_converted.amount + @amount
       end
-      Money.new(sum,@@currency_ref_name)
+      Money.new(sum, @@currency_ref_name)
     end
 
     def -(other)
       sub = -1
       if other.currency.eql? @currency
-        sub = @amount-other.amount
+        sub = @amount - other.amount
       else
         other_converted = other.convert_from(other.currency)
         sub = @amount - other_converted.amount
       end
-      Money.new(sub,@@currency_ref_name)
+      Money.new(sub, @@currency_ref_name)
     end
 
-    def /(dividend)
-      Money.new((@amount/dividend).to_f,@currency)
+    def /(other)
+      Money.new((@amount / other).to_f, @currency)
     end
 
-    def *(multiplicand)
-      Money.new((@amount*multiplicand).to_f,@currency)
+    def *(other)
+      Money.new((@amount * other).to_f, @currency)
     end
 
     def ==(other)
       if other.currency.eql? @currency
         return other.amount.round(2).eql? @amount.round(2)
       else
-        return  other.convert_to(@currency).amount.round(2).eql? @amount.round(2)
+        return other.convert_to(@currency)
+          .amount.round(2).eql? @amount.round(2)
       end
     end
 
     def <(other)
       if other.currency.eql? @currency
-        return @amount <other.amount.round(2)
+        return @amount < other.amount.round(2)
       else
         other_converted = other.convert_from(@currency)
-        return @amount <other_converted.amount.round(2)
+        return @amount < other_converted.amount.round(2)
       end
     end
 
     def >(other)
       if other.currency.eql? @currency
-        return @amount>other.amount.round(2)
+        return @amount > other.amount.round(2)
       else
         other_converted = other.convert_from(@currency)
-        return @amount>other_converted.amount.round(2)
+        return @amount > other_converted.amount.round(2)
       end
     end
 
@@ -88,7 +88,7 @@ module Samin
 
     def convert_from(currency)
       rate = @@currency_ref_conversion_rates[currency]
-      Money.new((@amount/rate).to_f.round(2),currency)
+      Money.new((@amount / rate).to_f.round(2), currency)
     end
   end
 end

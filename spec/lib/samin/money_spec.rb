@@ -11,11 +11,11 @@ module Samin
     let(:fifty_eur) { Money.new(money_amount, money_currency) }
     let(:currency_to_convert) { 'USD' }
     let(:converted_money) { fifty_eur.convert_to(currency_to_convert) }
-    let(:twenty_dollars ) { Money.new(20, 'USD') }
-    let(:arith_sum_result) { fifty_eur+twenty_dollars }
-    let(:arith_sub_result) {  fifty_eur-twenty_dollars }
-    let(:arith_div_result) { fifty_eur/2 }
-    let(:arith_mul_result) { twenty_dollars*3 }
+    let(:twenty_dollars) { Money.new(20, 'USD') }
+    let(:arith_sum_result) { fifty_eur + twenty_dollars }
+    let(:arith_sub_result) { fifty_eur - twenty_dollars }
+    let(:arith_div_result) { fifty_eur / 2 }
+    let(:arith_mul_result) { twenty_dollars * 3 }
     let(:twenty_dollars2) { Money.new(20, 'USD') }
     let(:twenty_dollars3) { Money.new(30, 'USD') }
     let(:fifty_eur_in_usd) { fifty_eur.convert_to('USD') }
@@ -24,17 +24,11 @@ module Samin
     context 'Instantiation' do
       describe '#initialize' do
         it 'to not raise an error when no params are provided' do
-          expect {
-            Money.new
-          }.to_not raise_error
-          expect {
-            Money.new(new_amount,nil)
-          }.to_not raise_error
+          expect { Money.new }.to_not raise_error
+          expect { Money.new(new_amount, nil) }.to_not raise_error
         end
         it 'to not raise error when all required params are present' do
-          expect {
-            Money.new(new_amount,new_currency)
-          }.to_not raise_error
+          expect { Money.new(new_amount, new_currency) }.to_not raise_error
         end
       end
     end
@@ -96,7 +90,7 @@ module Samin
         Money.conversion_rates(
           conf_base_name,
           conf_conversion_rates)
-        expect(converted_money.amount).to eq Money.new(55.50,'USD').amount
+        expect(converted_money.amount).to eq Money.new(55.50, 'USD').amount
       end
     end
 
@@ -106,7 +100,7 @@ module Samin
           Money.conversion_rates(
             conf_base_name,
             conf_conversion_rates)
-          expect(arith_sum_result.amount).to eq Money.new(68.02 ,'EUR').amount
+          expect(arith_sum_result.amount).to eq Money.new(68.02, 'EUR').amount
         end
       end
 
@@ -115,7 +109,7 @@ module Samin
           Money.conversion_rates(
             conf_base_name,
             conf_conversion_rates)
-          expect(arith_sub_result.amount).to eq Money.new(31.98 ,'EUR').amount
+          expect(arith_sub_result.amount).to eq Money.new(31.98, 'EUR').amount
         end
       end
 
@@ -124,16 +118,16 @@ module Samin
           Money.conversion_rates(
             conf_base_name,
             conf_conversion_rates)
-          expect(arith_div_result.amount).to eq Money.new(25 ,'EUR').amount
+          expect(arith_div_result.amount).to eq Money.new(25, 'EUR').amount
         end
       end
 
       describe '#*' do
-        it 'given multiplicand returns the result of multiplication of amount' do
+        it 'given multiplicand returns multiplication result' do
           Money.conversion_rates(
             conf_base_name,
             conf_conversion_rates)
-          expect(arith_mul_result.amount).to eq Money.new(60 ,'USD').amount
+          expect(arith_mul_result.amount).to eq Money.new(60, 'USD').amount
         end
       end
     end
@@ -146,7 +140,8 @@ module Samin
         it 'returns false if not equal' do
           expect(twenty_dollars == twenty_dollars3).to be_falsy
         end
-        it 'returns true if equal even though they are not originally from same currency' do
+        it 'returns true if equal even though they are not originally
+        from same currency' do
           expect(fifty_eur_in_usd == fifty_eur).to be_truthy
         end
       end
@@ -154,19 +149,19 @@ module Samin
       describe '#<' do
         context 'when currencies are the same' do
           it 'returns true if provided money is smaller than original' do
-            expect(five_dollars<twenty_dollars).to be_truthy
+            expect(five_dollars < twenty_dollars).to be_truthy
           end
         end
         context 'when currencies differ' do
           it 'returns true if provided money is smaller than original' do
-            expect(twenty_dollars<fifty_eur).to be_truthy
+            expect(twenty_dollars < fifty_eur).to be_truthy
           end
         end
       end
 
       describe '#>' do
         it 'returns true if provided money is higher than original' do
-          expect(twenty_dollars>five_dollars).to be_truthy
+          expect(twenty_dollars > five_dollars).to be_truthy
         end
       end
     end
