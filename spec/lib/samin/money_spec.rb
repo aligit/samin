@@ -74,7 +74,9 @@ module Samin
     end
 
     describe '#convert_to' do
-      it 'is a pending example'
+      it 'should return an instance of Money' do
+        expect(fifty_eur.convert_to).to be_instance_of Money
+      end
     end
 
     context 'Arithmetics' do
