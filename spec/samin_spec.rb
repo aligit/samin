@@ -21,7 +21,13 @@ describe Samin do
 
   context 'Configuration' do
     describe '.conversion_rates' do
-      it 'is a pending example'
+      context 'when conversion rates are properly set' do
+        it 'given currency name and conversion rates, returns true' do
+          expect(Money.conversion_rates).to be_truthy
+        end
+      end
+      context 'when issues are raised while setting conversion rates' do
+      end
     end
   end
 
