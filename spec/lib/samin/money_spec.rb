@@ -152,14 +152,21 @@ module Samin
       end
 
       describe '#<' do
-        it 'returns true if provided money is smaller than original' do
-          expect(twenty_dollars>five_dollars).to be_truthy
+        context 'when currencies are the same' do
+          it 'returns true if provided money is smaller than original' do
+            expect(five_dollars<twenty_dollars).to be_truthy
+          end
+        end
+        context 'when currencies differ' do
+          it 'returns true if provided money is smaller than original' do
+            expect(twenty_dollars<fifty_eur).to be_truthy
+          end
         end
       end
 
       describe '#>' do
-        it 'returns true if provided money is greater than original' do
-          expect(fifty_eur>twenty_dollars).to be_truthy
+        it 'returns true if provided money is higher than original' do
+          expect(twenty_dollars>five_dollars).to be_truthy
         end
       end
     end
