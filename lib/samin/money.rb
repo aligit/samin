@@ -51,6 +51,13 @@ module Samin
       Money.new((@amount*multiplicand).to_f,@currency)
     end
 
+    def ==(other)
+      if other.currency.eql? @currency
+        return true if other.amount.round(2).eql? @amount.round(2)
+      end
+      false
+    end
+
     def self.conversion_rates(currency_name = 'EUR', rates = {})
       unless currency_name.nil? || rates.nil?
         @@currency_ref_name ||= currency_name
