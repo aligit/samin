@@ -32,6 +32,17 @@ module Samin
       Money.new(sum,@@currency_ref_name)
     end
 
+    def -(other)
+      sub = -1
+      if other.currency.eql? @currency
+        sub = @amount-other.amount
+      else
+        other_converted = other.convert_from(other.currency)
+        sub = @amount - other_converted.amount
+      end
+      Money.new(sub,@@currency_ref_name)
+    end
+
     def self.conversion_rates(currency_name = 'EUR', rates = {})
       unless currency_name.nil? || rates.nil?
         @@currency_ref_name ||= currency_name
