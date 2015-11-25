@@ -11,6 +11,10 @@ module Samin
       @currency = currency
     end
 
+    def inspect
+      "#{@amount} #{@currency}"
+    end
+
     def self.conversion_rates(currency_name = 'EUR', rates = {})
       unless currency_name.nil? || rates.nil?
         @currency_ref_name ||= currency_name

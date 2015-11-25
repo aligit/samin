@@ -68,7 +68,8 @@ module Samin
 
     describe '#inspect' do
       it 'returns both #amount and #currency' do
-        expect(fifty_eur.inspect).to be instance_of String
+        expect(fifty_eur.inspect).to be_instance_of String
+        expect(fifty_eur.inspect).to eq "#{money_amount} #{money_currency}"
       end
     end
 
