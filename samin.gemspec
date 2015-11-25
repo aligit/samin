@@ -29,8 +29,8 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.10"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec"
-  spec.add_development_dependency "pry"
-  spec.add_development_dependency "pry-byebug"
-  spec.add_development_dependency "pry-coolline"
+  spec.add_development_dependency "rspec", "~> 3.4.0"
+  spec.add_development_dependency "pry", "~> 0.10.3"
+  spec.add_development_dependency "pry-byebug", "~> 3.3.0"
+  spec.add_development_dependency "pry-coolline", "~> 0.2.5"
 end
