@@ -5,5 +5,9 @@ module Samin::Money
   class Money
     def initialize(args)
     end
+
+    def self.conversion_rates
+      true
+    end
   end
 end
