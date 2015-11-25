@@ -3,10 +3,12 @@ module Samin
   ## Money class that implements required features for currency
   ## conversion
   class Money
-    attr_writer :currency_ref_name
-    attr_writer :currency_ref_conversion_rates
+    attr_writer :currency_ref_name, :currency_ref_conversion_rates
+    attr_reader :currency, :amount
 
-    def initialize(args)
+    def initialize(amount = 0, currency = 'CHF')
+      @amount   = amount
+      @currency = currency
     end
 
     def self.conversion_rates(currency_name = 'EUR', rates = {})

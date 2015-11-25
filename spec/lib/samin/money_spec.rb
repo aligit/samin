@@ -4,11 +4,25 @@ module Samin
   describe Money do
     let(:conf_base_name) { 'EUR' }
     let(:conf_conversion_rates) { { 'USD' => 1.11, 'Bitcoin' => 0.0047 } }
+    let(:new_amount) { 20 }
+    let(:new_currency) { 'CHF' }
     let(:fifty_eur) { Money.new(50, 'EUR') }
 
     context 'Instantiation' do
       describe '#initialize' do
-        it 'is a pending example'
+        it 'to not raise an error when no params are provided' do
+          expect {
+            Money.new
+          }.to_not raise_error
+          expect {
+            Money.new(new_amount,nil)
+          }.to_not raise_error
+        end
+        it 'to not raise error when all required params are present' do
+          expect {
+            Money.new(new_amount,new_currency)
+          }.to_not raise_error
+        end
       end
     end
 
@@ -16,8 +30,9 @@ module Samin
       describe '.conversion_rates' do
         context 'when conversion rates are properly set' do
           it 'given currency name and conversion rates, returns true' do
-            expect(Money.conversion_rates(conf_base_name,
-                                          conf_conversion_rates)).to be_truthy
+            expect(Money
+              .conversion_rates(conf_base_name,
+                                conf_conversion_rates)).to be_truthy
           end
         end
         context 'when conversion rates are not provided' do
