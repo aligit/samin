@@ -125,7 +125,12 @@ module Samin
       end
 
       describe '#*' do
-        it 'is a pending example'
+        it 'given multiplicand returns the result of multiplication of amount' do
+          Money.conversion_rates(
+            conf_base_name,
+            conf_conversion_rates)
+          expect(arith_mul_result.amount).to eq Money.new(60 ,'USD').amount
+        end
       end
     end
 
