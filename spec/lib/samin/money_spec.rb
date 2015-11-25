@@ -16,6 +16,7 @@ module Samin
     let(:arith_sub_result) {  fifty_eur-twenty_dollars }
     let(:arith_div_result) { fifty_eur/2 }
     let(:arith_mul_result) { twenty_dollars*3 }
+    let(:twenty_dollars2) { Money.new(20, 'USD') }
 
     context 'Instantiation' do
       describe '#initialize' do
@@ -136,7 +137,12 @@ module Samin
 
     context 'Comparisons' do
       describe '#==' do
-        it 'is a pending example'
+        it 'returns true if equal' do
+          Money.conversion_rates(
+            conf_base_name,
+            conf_conversion_rates)
+          expect(twenty_dollars == twenty_dollars2).to be_truthy
+        end
       end
 
       describe '#<' do
