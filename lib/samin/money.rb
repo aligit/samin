@@ -17,8 +17,19 @@ module Samin
 
     def convert_to(currency)
       rate = @@currency_ref_conversion_rates[currency]
-      # Money.new((@amount/rate).to_f.round(2),currency)
+      return nil if rate.nil?
       Money.new((@amount*rate).to_f.round(2),currency)
+    end
+
+    def +(other)
+      sum = -1
+      if other.currency.eql? @currency
+        sum = @amount+other.amount
+      else
+        other_converted = other.convert_from(other.currency)
+        sum = other_converted.amount + @amount
+      end
+      Money.new(sum,@@currency_ref_name)
     end
 
     def self.conversion_rates(currency_name = 'EUR', rates = {})
@@ -28,6 +39,11 @@ module Samin
         return true
       end
       false
+    end
+
+    def convert_from(currency)
+      rate = @@currency_ref_conversion_rates[currency]
+      Money.new((@amount/rate).to_f.round(2),currency)
     end
   end
 end

@@ -99,6 +99,9 @@ module Samin
     context 'Arithmetics' do
       describe '#+' do
         it 'should return as result the sum of prvoided moneys' do
+          Money.conversion_rates(
+            conf_base_name,
+            conf_conversion_rates)
           expect(arith_sum_result.amount).to eq Money.new(68.02 ,'EUR').amount
         end
       end
