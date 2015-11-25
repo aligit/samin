@@ -19,7 +19,7 @@ module Samin
     let(:twenty_dollars2) { Money.new(20, 'USD') }
     let(:twenty_dollars3) { Money.new(30, 'USD') }
     let(:fifty_eur_in_usd) { fifty_eur.convert_to('USD') }
-
+    let(:five_dollars) { Money.new(5, 'USD') }
 
     context 'Instantiation' do
       describe '#initialize' do
@@ -152,11 +152,15 @@ module Samin
       end
 
       describe '#<' do
-        it 'is a pending example'
+        it 'returns true if provided money is smaller than original' do
+          expect(twenty_dollars>five_dollars).to be_truthy
+        end
       end
 
       describe '#>' do
-        it 'is a pending example'
+        it 'returns true if provided money is greater than original' do
+          expect(fifty_eur>twenty_dollars).to be_truthy
+        end
       end
     end
   end
