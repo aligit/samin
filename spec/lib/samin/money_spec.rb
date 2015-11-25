@@ -21,11 +21,17 @@ module Samin
           end
         end
         context 'when conversion rates are not provided' do
-          it 'sets default conversion rates when they are not provide' do
+          it 'sets default conversion rates when they are not provide
+          and returns true' do
             expect(Money.instance_variable_get(:@currency_ref_name))
               .to eq conf_base_name
             expect(Money.instance_variable_get(:@currency_ref_conversion_rates))
               .to eq conf_conversion_rates
+          end
+        end
+        context 'when wrong parameter values are provided' do
+          it 'falsy if wrong conversion rates are provided' do
+            expect(Money.conversion_rates(nil, nil)).to be_falsy
           end
         end
       end
