@@ -66,6 +66,12 @@ module Samin
       end
     end
 
+    describe '#inspect' do
+      it 'returns both #amount and #currency' do
+        expect(fifty_eur.inspect).to be instance_of String
+      end
+    end
+
     describe '#convert_to' do
       it 'is a pending example'
     end
