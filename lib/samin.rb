@@ -1,9 +1,6 @@
-require "samin/version"
+require 'samin/version'
+require 'samin/money'
 
 module Samin
-  @@conversion_rates
-  class Money
-    def initialize(args)
-    end
-  end
+
 end

@@ -1,5 +1,7 @@
 module Samin::Money
-  @@conversion_rates
+  # attr_accessor :@@currency_reference_name
+  # attr_accessor :@@currency_reference_conversion_rates
+
   class Money
     def initialize(args)
     end
