@@ -15,14 +15,16 @@ module Samin
       "#{@amount} #{@currency}"
     end
 
-    def convert_to
-      Money.new
+    def convert_to(currency)
+      rate = @@currency_ref_conversion_rates[currency]
+      # Money.new((@amount/rate).to_f.round(2),currency)
+      Money.new((@amount*rate).to_f.round(2),currency)
     end
 
     def self.conversion_rates(currency_name = 'EUR', rates = {})
       unless currency_name.nil? || rates.nil?
-        @currency_ref_name ||= currency_name
-        @currency_ref_conversion_rates ||= rates
+        @@currency_ref_name ||= currency_name
+        @@currency_ref_conversion_rates ||= rates
         return true
       end
       false

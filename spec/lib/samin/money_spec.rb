@@ -9,6 +9,8 @@ module Samin
     let(:money_amount) { 50 }
     let(:money_currency) { 'EUR' }
     let(:fifty_eur) { Money.new(money_amount, money_currency) }
+    let(:currency_to_convert) { 'USD' }
+    let(:converted_money) { fifty_eur.convert_to(currency_to_convert) }
 
     context 'Instantiation' do
       describe '#initialize' do
@@ -40,9 +42,9 @@ module Samin
         context 'when conversion rates are not provided' do
           it 'sets default conversion rates when they are not provide
           and returns true' do
-            expect(Money.instance_variable_get(:@currency_ref_name))
+            expect(Money.class_variable_get(:@@currency_ref_name))
               .to eq conf_base_name
-            expect(Money.instance_variable_get(:@currency_ref_conversion_rates))
+            expect(Money.class_variable_get(:@@currency_ref_conversion_rates))
               .to eq conf_conversion_rates
           end
         end
@@ -75,7 +77,17 @@ module Samin
 
     describe '#convert_to' do
       it 'should return an instance of Money' do
-        expect(fifty_eur.convert_to).to be_instance_of Money
+        Money.conversion_rates(
+          conf_base_name,
+          conf_conversion_rates)
+        expect(fifty_eur.convert_to(currency_to_convert))
+          .to be_instance_of Money
+      end
+      it 'should return the expected value' do
+        Money.conversion_rates(
+          conf_base_name,
+          conf_conversion_rates)
+        expect(converted_money.amount).to eq Money.new(55.50,'USD').amount
       end
     end
 
